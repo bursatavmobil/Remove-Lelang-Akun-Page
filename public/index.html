@@ -5,22 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hapus Akun - TAV Lelang</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <svg class="icon-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
-                    </path>
-                </svg>
-                <h1>Konfirmasi Hapus Akun</h1>
-            </div>
+    <div class="minimal-container">
+        <h1 class="minimal-heading">Hapus Akun.</h1>
 
+        <div class="minimal-card">
             <p class="description">
                 Tindakan ini akan menghapus seluruh data Anda secara permanen dari sistem TAV Lelang dan tidak dapat
                 dibatalkan.
@@ -31,6 +24,18 @@
             <div class="actions">
                 <button id="btn-cancel" class="btn btn-secondary">Batal</button>
                 <button id="btn-delete" class="btn btn-danger">Ya, Hapus Akun</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Alert -->
+    <div id="custom-alert" class="alert-overlay hidden">
+        <div class="minimal-card alert-box animate-fade-in">
+            <h3>Konfirmasi Penghapusan</h3>
+            <p>Apakah Anda benar-benar yakin ingin menghapus akun dan data ini secara permanen?</p>
+            <div class="actions" style="margin-top: 24px;">
+                <button id="alert-btn-no" class="btn btn-secondary">Tidak</button>
+                <button id="alert-btn-yes" class="btn btn-danger">Ya, Lanjutkan</button>
             </div>
         </div>
     </div>

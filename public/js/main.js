@@ -5,15 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCancel = document.getElementById('btn-cancel');
     const statusMessage = document.getElementById('status-message');
 
-    // Mendapatkan ID dari URL Parameter redirect mobile
-    // Contoh URL: https://domainanda.com/delete.html?userId=YrkhBDNLbOR92jjaF4pp&stockId=frPvP0v2lib0GIJCTqmS
+    const customAlert = document.getElementById('custom-alert');
+    const alertBtnYes = document.getElementById('alert-btn-yes');
+    const alertBtnNo = document.getElementById('alert-btn-no');
+
     const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('userId') || 'YrkhBDNLbOR92jjaF4pp'; // Fallback ke default dari contoh
+    const userId = urlParams.get('userId') || 'YrkhBDNLbOR92jjaF4pp';
     const stockId = urlParams.get('stockId') || 'frPvP0v2lib0GIJCTqmS';
 
     const showMessage = (msg, type) => {
         statusMessage.textContent = msg;
-        statusMessage.className = type; 
+        statusMessage.className = type;
         statusMessage.classList.remove('hidden');
     };
 
@@ -24,17 +26,22 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     btnCancel.addEventListener('click', () => {
-        // Fallback action untuk tombol batal (misal redirect ke skema aplikasi native)
-        window.location.href = 'tavlelang://app/home'; 
+        window.location.href = 'tavlelang://app/home';
     });
 
-    btnDelete.addEventListener('click', async () => {
-        if (!confirm('Apakah Anda benar-benar yakin ingin menghapus data ini?')) return;
+    btnDelete.addEventListener('click', () => {
+        customAlert.classList.remove('hidden');
+    });
 
+    alertBtnNo.addEventListener('click', () => {
+        customAlert.classList.add('hidden');
+    });
+
+    alertBtnYes.addEventListener('click', async () => {
+        customAlert.classList.add('hidden');
         toggleButtons(true);
         statusMessage.classList.add('hidden');
 
-        // Eksekusi API secara paralel jika kedua ID ada
         const promises = [];
         if (userId) promises.push(deleteUser(userId));
         if (stockId) promises.push(deleteStock(stockId));
@@ -46,8 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const results = await Promise.all(promises);
-        
-        // Mengecek apakah ada request yang gagal
         const hasError = results.some(res => !res.success);
 
         if (hasError) {

@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js';
 
 /**
- * Fungsi pembantu untuk melakukan HTTP Request (AJAX)
+ * (AJAX)
  */
 async function fetchApi(endpoint, method = 'DELETE') {
     try {
